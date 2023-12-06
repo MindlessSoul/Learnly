@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>template page</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/editprofile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/Navbar.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="green-container">
+            <div class="white-container">
+                <!-- Profile picture -->
+                <div class="profile-picture-container">
+                    {% if user.userprofile.profile_pic %}
+                        <img src="{{ user.userprofile.profile_pic }}" alt="Profile Picture">
+                    {% else %}
+                        <img src="{% static '/assets/Profile.png' %}" alt="Profile Picture" id="profile-picture">
+                    {% endif %}
+                    </form>
+                </div>
+
+                <!-- Content goes here -->
+                <div id="profile-details">
+                    {% comment %} 
+                    to ini ku edit mattiin bentar userprofilenya, ada bug
+                    {% endcomment %}
+                    {% comment %} <div class="form-group">
+                        <label for="name">Change profile picture:</label>
+                        <form id="profile_pic_change" method="POST", action="{% url 'commit_pic_edit' %}">
+                            {% csrf_token %}
+                            <input name="user_profile" type="file" id="attachment" accept=".jpg,.png,.jpeg">
+                            <button type="submit" class="save-button" >Save Picture</button>
+                        </form>
+                    </div> {% endcomment %}
+                    <div class="form-group">
+                        <form id="name_change" method="POST", action="{% url 'commit_edit' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input name="changed_name" type="text" id="display-name" >
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input name="changed_email" type="email" id="display-email" >
+                            </div>
+                            <button type="submit">Save</button>
+                            {% for message in messages %}
+                            <h5>{{message}}</h5>
+                            {% endfor %}
+                        </form>
+                    </div>
+                    {% comment %} <div class="form-group">
+                        <form id="name_change" method="POST", action="{% url 'edit_profile' %}">
+                            {% csrf_token %}
+                            <label for="email">Email: {{email}}</label>
+                            <input name="changed_email" type="email" id="display-email" >
+                        </form>
+                    </div> {% endcomment %}
+                    
+                </div>
+            </div>
+            <!-- navbar.html -->
+            <div class="navbar">
+                <link rel="stylesheet" type="text/css" href="{% static '/css/Navbar.css' %}">
+                <a href="{% url 'mycourse' %}" class="nav-link active">
+                <img src="{% static '/assets/My-Courses.png' %}" alt="My Course" class="nav-icon">
+                </a>
+                <a href="{% url 'collection' %}" class="nav-link">
+                <img src="{% static '/assets/Collection.png' %}" alt="Collection" class="nav-icon">
+                </a>
+                <a href="{% url 'mynote' %}" class="nav-link">
+                <img src="{% static '/assets/My-Notes.png' %}" alt="My Notes" class="nav-icon">
+                </a>
+                <a href="{% url 'profile' %}" class="nav-link">
+                <img src="{% static '/assets/Profile.png' %}" alt="Profile" class="nav-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+    {% comment %} <script src="{% static '/js/profileedit.js' %}"></script> {% endcomment %}
+</body>
+</html>
